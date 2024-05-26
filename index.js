@@ -1,46 +1,27 @@
-// eventListener = Listen for specific events to create interactive web pages
-//                  events: keydown, keyup
-//                  document.addEventListener(event, callback)
+const myButton = document.getElementById('myBtn');
+const myImage = document.getElementById('myImg');
 
-const myBox = document.getElementById('myBox')
-const movement = 20;
-let x = 0;
-let y = 0;
+myButton.addEventListener('click', event => {
+    
+    // ----if we don't want to reserve space for the picture
+    // if (myImage.style.display === 'none'){
+    //     myImage.style.display = 'block';
+    //     myButton.textContent = 'Hide'
+    // } 
+    // else {
+    //     myImage.style.display = 'none';
+    //     myButton.textContent = 'Show'     
+    // }
 
-document.addEventListener('keydown', event => {
-    if (event.key.startsWith('Arrow')){
-
-        event.preventDefault();
-        switch(event.key){
-            case 'ArrowUp':
-                y -= movement;
-                break;
-            case 'ArrowDown':
-                y += movement;
-                break;
-            case 'ArrowLeft':
-                x -= movement;
-                break
-            case 'ArrowRight':
-                x += movement;
-                break;
-        }
-
-        document.addEventListener('keydown', event => {
-            myBox.textContent = '😲';
-            myBox.style.backgroundColor = 'red'
-            console.log(`Key down = ${event.key}`);
-        });
-        
-        document.addEventListener('keyup', event => {
-            myBox.textContent = '😀';
-            myBox.style.backgroundColor = 'lightblue'
-            console.log(`Key down = ${event.key}`);
-        });
-
-        myBox.style.top = `${y}px`;
-        myBox.style.left = `${x}px`;
-
+    // if we reserve space for the picture
+    if (myImage.style.visibility === 'hidden'){
+        myImage.style.visibility = 'visible';
+        myButton.textContent = 'Hide'
+    } 
+    else {
+        myImage.style.visibility = 'hidden';
+        myButton.textContent = 'Show'     
     }
-})
 
+
+})
