@@ -1,38 +1,56 @@
-// classList = Element property in JavaScript used to interact
-//              with an element's list of classes (CSS Classes)
-//              Allows you to make reusable classes for any elements
-//              across your website
+// ROCK PAPER SCISSORS
 
-//  add()
-//  remove()
-//  toggle() = Remove if present, Add if not
-//  replace(oldClass, newClass)
-//  contains()
+const choices = ['rock', 'paper', 'scissors'];
+const playerDisplay = document.getElementById('playerDisplay');
+const computerDisplay = document.getElementById('computerDisplay');
+const resultDisplay = document.getElementById('resultDisplay');
+const playerScoreDisplay = document.getElementById('playerScoreDisplay');
+const computerScoreDisplay = document.getElementById('computerScoreDisplay')
+let playerScore = 0;
+let computerScore = 0;
 
-let buttons = document.querySelectorAll('.myButtons');
 
-buttons.forEach(button => {
-    button.classList.add('enabled');
-});
+function playGame(playerChoice) {
 
-buttons.forEach(button => {
-    button.addEventListener('mouseover', event => {
-        event.target.classList.toggle('hover')
-    })
-});
+    const computerChoice = choices[Math.floor(Math.random() * 3)];
+    let result = '';
 
-buttons.forEach(button => {
-    button.addEventListener('mouseout', event => {
-        event.target.classList.toggle('hover')
-    })
-});
+    if(playerChoice === computerChoice) {
+        result = "IT'S A TIE";
 
-buttons.forEach(button => {
-    button.addEventListener('click', event => {
-        if (event.target.classList.contains('disabled')){
-            event.target.textContent += '🤬'
-        } else{
-            event.target.classList.replace('enabled', 'disabled')
+    } 
+    else {
+        switch(playerChoice) {
+            case 'rock':
+                result = (computerChoice === 'scissors') ? 'YOU WIN' : 'YOU LOSE';
+                break;
+
+            case 'paper':
+                result = (computerChoice === 'rock') ? 'YOU WIN' : 'YOU LOSE';
+                break;
+
+            case 'scissors':
+                result = (computerChoice === 'paper') ? 'YOU WIN' : 'YOU LOSE';
+                break;
         }
-    })
-})
+    } 
+    playerDisplay.textContent = `PLAYER: ${playerChoice}`;
+    computerDisplay.textContent = `Computer: ${computerChoice}`;
+    resultDisplay.textContent = result;
+
+    resultDisplay.classList.remove('greenText', 'redText');
+
+    switch(result){
+        case 'YOU WIN':
+            resultDisplay.classList.add('greenText');
+            playerScore++;
+            playerScoreDisplay.textContent = playerScore;
+            break;
+        case 'YOU LOSE':
+            resultDisplay.classList.add('redText');
+            computerScore++;
+            computerScoreDisplay.textContent = computerScore;
+            break;
+    }
+}
+
