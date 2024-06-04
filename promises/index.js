@@ -12,9 +12,15 @@
 
 function walkDog() {
 
+  
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve('You walk the dog 🐕');
+            const walkedDog = true;
+            if (walkedDog){
+                resolve('You walk the dog 🐕');
+            } else{
+                reject("You didn't walk the dog")
+            }
         }, 1500);
     })
 }
@@ -23,7 +29,12 @@ function cleanKitchen() {
 
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve('You clean the kitchen🧹');
+            const cleanedKitchen = true;
+            if (cleanedKitchen){
+                resolve('You clean the kitchen🧹');
+            } else{
+                reject("You didn't clean the kitchen")
+            }
         }, 2500)
     })
 }
@@ -31,16 +42,26 @@ function cleanKitchen() {
 function takeTrashOut() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve('You take the trash out♻');
+            const trashTakenOut = false;
+            if (trashTakenOut){
+                resolve('You take the trash out♻');
+            } else{
+                reject("You didn't take the trash out")
+            }
         }, 500)
     })
 
 };
 
-
-
-walkDog().then(value => {console.log(value); return cleanKitchen()
-    .then(value => {console.log(value); return takeTrashOut()
-        .then(value => {console.log(value); console.log('You finished all the chores!');})
-    })
-})
+walkDog()
+    .then(value => {
+        console.log(value); 
+        return cleanKitchen()})
+    .then(value => {
+        console.log(value); 
+        return takeTrashOut()})
+    .then(value => {
+        console.log(value); 
+        console.log('You finished all the chores');})
+    .catch(error => 
+        console.error(error))
